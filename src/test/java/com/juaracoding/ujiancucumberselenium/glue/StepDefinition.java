@@ -35,6 +35,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 public class StepDefinition {
 
 	private static WebDriver driver;
+	private LoginPage loginPage;
 	
 	ExtentTest extentTest;
 	static ExtentReports reports = new ExtentReports("src/main/resources/TestReport.html");
@@ -45,6 +46,7 @@ public class StepDefinition {
 	@Before
 	public void initializeObjects() {
 		DriverSingleton.getInstance(configurationProperties.getBrowser());
+		loginPage = new LoginPage();
 
 		TestCases[] tests = TestCases.values();
 		extentTest = reports.startTest(tests[Utils.testCount].getTestName());
@@ -71,7 +73,8 @@ public class StepDefinition {
 		driver.quit();
 	}
 	
-	//diisikan scenario
+	//Login
+	
 	
 	
 	public void tunggu() {

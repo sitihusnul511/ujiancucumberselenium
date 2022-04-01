@@ -23,11 +23,8 @@ public class ConfigurationProperties {
 	@Value("${txtWelcome}")
 	private String txtWelcome;
 	
-	@Value("${txtTitleBookingPage}")
-	private String txtTitleBookingPage;
-	
-	@Value("${txtTitleProfile}")
-	private String txtTitleProfile;
+	@Value("${txtTitleLoginPage}")
+	private String txtTitleLoginPage;
 
 	public String getBrowser() {
 		return browser;
@@ -48,13 +45,35 @@ public class ConfigurationProperties {
 	public String getTxtWelcome() {
 		return txtWelcome;
 	}
-	
-	public String getTxtTitleBookingPage() {
-		return txtTitleBookingPage;
+
+	public String getTxtTitleLoginPage() {
+		return txtTitleLoginPage;
+	}
+
+	public void setTxtTitleLoginPage(String txtTitleLoginPage) {
+		this.txtTitleLoginPage = txtTitleLoginPage;
+	}
+
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setTxtWelcome(String txtWelcome) {
+		this.txtWelcome = txtWelcome;
 	}
 	
-	public String getTxtTitleProfile() {
-		return txtTitleProfile;
-	}
+
 	
 }
