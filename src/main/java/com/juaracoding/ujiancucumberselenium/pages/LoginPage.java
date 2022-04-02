@@ -33,7 +33,7 @@ public class LoginPage {
 		btnLogin.click();
 	}
 	
-	public String getPageTitleLogin() {
+	public String getTxtMyAccount() {
 		return driver.getTitle();
 	}
 

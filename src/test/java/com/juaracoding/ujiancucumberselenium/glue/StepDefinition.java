@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import com.juaracoding.ujiancucumberselenium.config.AutomationFrameworkConfig;
 import com.juaracoding.ujiancucumberselenium.drivers.DriverSingleton;
 import com.juaracoding.ujiancucumberselenium.pages.LoginPage;
+import com.juaracoding.ujiancucumberselenium.pages.OrderSearch;
+import com.juaracoding.ujiancucumberselenium.pages.RegisterPage;
 import com.juaracoding.ujiancucumberselenium.utils.ConfigurationProperties;
 import com.juaracoding.ujiancucumberselenium.utils.Constants;
 import com.juaracoding.ujiancucumberselenium.utils.TestCases;
@@ -36,6 +38,8 @@ public class StepDefinition {
 
 	private static WebDriver driver;
 	private LoginPage loginPage;
+	private RegisterPage registerPage;
+	private OrderSearch orderSearch;
 	
 	ExtentTest extentTest;
 	static ExtentReports reports = new ExtentReports("src/main/resources/TestReport.html");
@@ -73,9 +77,62 @@ public class StepDefinition {
 		driver.quit();
 	}
 	
-	//Login
+	@Given("Customer mengakses url")
+	public void customer_mengakses_url() {
+		driver = DriverSingleton.getDriver();
+		driver.get(Constants.URL);
+		extentTest.log(LogStatus.PASS, "Navigating to "+Constants.URL);
+	}
 	
+	@When("Customer melakukan registrasi")
+	public void customer_melakukan_registrasi() {
+		scroll();
+		registerPage.submitRegister(configurationProperties.getUserName() ,configurationProperties.getEmail(), configurationProperties.getPassword());
+		extentTest.log(LogStatus.PASS, "Customer melakukan registrasi");
+	}
 	
+	@Then("Customer berhasil registrasi")
+	public void customer_berhasil_registrasi() {
+		//refresh
+		assertEquals(configurationProperties.getTxtTitleLoginPage(), registerPage.getTxtTitleLoginPage());
+		extentTest.log(LogStatus.PASS, "Customer berhasil registrasi");
+	}
+	
+	@When("Customer klik login button")
+	public void customer_klik_login_button() {
+		loginPage.submitLogin(configurationProperties.getEmail(), configurationProperties.getPassword());
+		extentTest.log(LogStatus.PASS, "Customer klik login button");
+	}
+	
+	@Then("Customer berhasil login")
+	public void customer_berhasil_login() {
+		assertEquals(configurationProperties.getTxtMyAccount(), loginPage.getTxtMyAccount());
+		extentTest.log(LogStatus.PASS, "Customer berhasil login");
+	}
+	
+	@When("Customer masuk halaman product")
+	public void customer_masuk_halaman_product() {
+		orderSearch.goToMenuOrders();
+		extentTest.log(LogStatus.PASS, "Customer masuk halaman product");
+	}
+	
+	@Then("Customer mencari product")
+	public void customer_mencari_product() {
+		orderSearch.searchProduct(configurationProperties.getInputProduct(), configurationProperties.getWarna(), configurationProperties.getUkuran());
+		extentTest.log(LogStatus.PASS, "Customer mencari product");
+	}
+	
+	@Then("Customer melakukan checkout")
+	public void customer_melakukan_checkout() {
+		orderSearch.checkoutProduct(configurationProperties.getFirstName(), configurationProperties.getLastName(), configurationProperties.getCompany(), configurationProperties.getCountry(), configurationProperties.getAddress(), configurationProperties.getDetailAddress(), configurationProperties.getCity(), configurationProperties.getProvince(), configurationProperties.getPostcode(), configurationProperties.getPhone());
+		extentTest.log(LogStatus.PASS, "Customer melakukan checkout");
+	}
+	
+	@Then("Customer berhasil order")
+	public void customer_berhasil_order() {
+		assertEquals(configurationProperties.getGetTxtOrder(), orderSearch.getPageCheckout());
+		extentTest.log(LogStatus.PASS, "Customer berhasil order");
+	}
 	
 	public void tunggu() {
 		try {
