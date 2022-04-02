@@ -1,5 +1,7 @@
 package com.juaracoding.ujiancucumberselenium.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,16 +31,28 @@ public class RegisterPage {
 	@FindBy(id = "reg_email")
 	WebElement inputEmailReg;
 	
-	@FindBy(css = "##customer_login > div.u-column2.col-2 > form > p:nth-child(5) > button")
+	@FindBy(css = "#customer_login > div.u-column2.col-2 > form > p:nth-child(5) > button")
 	WebElement btnRegister;
 	
-	public void submitRegister(String usernameReg, String passwordReg, String email) {
+	@FindBy(css = "body > p > a")
+	WebElement btnDissmiss;
+	
+	
+	
+	public void submitRegister(String usernameReg, String passwordReg, String emailReg) {
+		
+		tunggu();
+		btnDissmiss.click();
+		tunggu();
 		btnMyAccount.click();
 		tunggu();
 		scroll();
 		inputUsernameReg.sendKeys(usernameReg);
-		inputEmailReg.sendKeys(email);
+		tunggu();
+		inputEmailReg.sendKeys(emailReg);
+		tunggu();
 		inputPasswordReg.sendKeys(passwordReg);
+		tunggu();
 		btnRegister.click();
 	}
 	
@@ -48,7 +62,7 @@ public class RegisterPage {
 	
 	public void tunggu() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

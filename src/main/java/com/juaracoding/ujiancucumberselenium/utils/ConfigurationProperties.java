@@ -11,7 +11,7 @@ public class ConfigurationProperties {
 	@Value("${browser}")
 	private String browser;
 	
-	@Value("${username}")
+	@Value("${userName}")
 	private String userName;
 	
 	@Value("${email}")
@@ -19,6 +19,16 @@ public class ConfigurationProperties {
 	
 	@Value("${password}")
 	private String password;
+	
+	@Value("${usernameReg}")
+	private String usernameReg;
+	
+	@Value("${passwordReg}")
+	private String passwordReg;
+	
+	@Value("${emailReg}")
+	private String emailReg;
+
 		
 	@Value("${txtTitleLoginPage}")
 	private String txtTitleLoginPage;
@@ -240,6 +250,30 @@ public class ConfigurationProperties {
 
 	public void setPilih(String pilih) {
 		this.pilih = pilih;
+	}
+
+	public String getUsernameReg() {
+		return usernameReg;
+	}
+
+	public void setUsernameReg(String usernameReg) {
+		this.usernameReg = usernameReg;
+	}
+
+	public String getPasswordReg() {
+		return passwordReg;
+	}
+
+	public void setPasswordReg(String passwordReg) {
+		this.passwordReg = passwordReg;
+	}
+
+	public String getEmailReg() {
+		return emailReg;
+	}
+
+	public void setEmailReg(String emailReg) {
+		this.emailReg = emailReg;
 	}
 	
 	

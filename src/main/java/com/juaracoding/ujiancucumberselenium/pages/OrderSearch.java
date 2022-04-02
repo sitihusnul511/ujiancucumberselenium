@@ -1,11 +1,13 @@
 package com.juaracoding.ujiancucumberselenium.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -20,8 +22,8 @@ private WebDriver driver;
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(css = "#post-8 > div > div > nav > ul > li")
-	List<WebElement> menuOrders;
+	@FindBy(css = "#post-8 > div > div > nav > ul > li.woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders > a")
+	WebElement menuOrders;
 	
 	@FindBy(css = "#post-8 > div > div > div > div.woocommerce-message.woocommerce-message--info.woocommerce-Message.woocommerce-Message--info.woocommerce-info > a")
 	WebElement btnProduct;
@@ -68,6 +70,10 @@ private WebDriver driver;
 	@FindBy(id = "select2-billing_country-container")
 	WebElement country;
 	
+	@FindBy(id = "body > span > span > span.select2-search.select2-search--dropdown > input")
+	WebElement inputcountry;
+	
+	
 	@FindBy(id = "billing_address_1")
 	WebElement address;	
 	
@@ -79,6 +85,10 @@ private WebDriver driver;
 	
 	@FindBy(id = "select2-billing_state-container")
 	WebElement province;
+	
+	@FindBy(id = "body > span > span > span.select2-search.select2-search--dropdown > input")
+	WebElement inputprovince;
+	
 	
 	@FindBy(id = "billing_postcode")
 	WebElement postcode;
@@ -96,7 +106,8 @@ private WebDriver driver;
 	WebElement getTxtOrder;
 	
 	public void goToMenuOrders() {
-		menuOrders.get(1).click();
+		tunggu();
+		menuOrders.click();
 		scroll();
 		btnProduct.click();
 	}
@@ -126,24 +137,48 @@ private WebDriver driver;
 			String add, String add2, String kota, String prov, String post, String telp) {
 		btnProceedToCO.click();
 		scroll();
+		tunggu();
 		firstName.sendKeys(fn);
+		tunggu();
 		lastName.sendKeys(ln);
-		scroll();
+		tunggu();
 		company.sendKeys(kantor);
+		tunggu();
+		
 		country.click();
-		country.sendKeys(negara);
-		country.sendKeys(Keys.ENTER);
+		List<Keys> country = new ArrayList<Keys>();
+		for(int i=0; i<2; i++) {
+			country.add(Keys.DOWN);
+		}
+		country.add(Keys.ENTER);
+		CharSequence[] cs = country.toArray(new CharSequence[country.size()]);
+		Actions keyDown = new Actions(driver); keyDown.sendKeys(Keys.chord(cs)).perform();
+		
 		scroll();
+		tunggu();
 		address.sendKeys(add);
+		tunggu();
 		detailAddress.sendKeys(add2);
-		city.sendKeys(kota);
-		terms.click();
+		tunggu();
 		scroll();
+		city.sendKeys(kota);
+		tunggu();
+		
 		province.click();
-		province.sendKeys(prov);
-		province.sendKeys(Keys.ENTER);
+		List<Keys> province = new ArrayList<Keys>();
+		for(int i=0; i<2; i++) {
+			province.add(Keys.DOWN);
+		}
+		province.add(Keys.ENTER);
+		CharSequence[] cs1 = province.toArray(new CharSequence[province.size()]);
+		Actions keyDown1 = new Actions(driver); keyDown1.sendKeys(Keys.chord(cs1)).perform();
+		
+		tunggu();
 		postcode.sendKeys(post);
+		tunggu();
 		phone.sendKeys(telp);
+		tunggu();
+		terms.click();
 		btnPlaceOrder.click();
 	}
 	
@@ -153,7 +188,7 @@ private WebDriver driver;
 	
 	public void tunggu() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

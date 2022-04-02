@@ -16,25 +16,37 @@ public class LoginPage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(id = "username")
+	@FindBy(id = "user_login")
 	WebElement inputUsername;
 	
-	@FindBy(id = "password")
+	@FindBy(id = "user_pass")
 	WebElement inputPassword;
 	
-	@FindBy(css = "#customer_login > div.u-column1.col-1 > form > p:nth-child(3) > button")
+	@FindBy(id = "wp-submit")
 	WebElement btnLogin;
 	
 	
 	
 	public void submitLogin(String username, String password) {
+		tunggu();
 		inputUsername.sendKeys(username);
+		tunggu();
 		inputPassword.sendKeys(password);
+		tunggu();
 		btnLogin.click();
 	}
 	
 	public String getTxtMyAccount() {
 		return driver.getTitle();
+	}
+	
+	public void tunggu() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

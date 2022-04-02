@@ -3,6 +3,7 @@ package com.juaracoding.ujiancucumberselenium.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.juaracoding.ujiancucumberselenium.drivers.DriverSingleton;
 
+
 public class OrderWithCompare {
+
 	
 private WebDriver driver;
 	
@@ -21,6 +24,7 @@ private WebDriver driver;
 		this.driver = DriverSingleton.getDriver();
 		PageFactory.initElements(driver, this);
 	}
+	
 	
 	@FindBy(css = "#noo-site > header > div.navbar-wrapper > div > div > div > div > a > img")
 	WebElement btnHome;
@@ -37,10 +41,13 @@ private WebDriver driver;
 	@FindBy(xpath = "//*[@id=\"noo-site\"]/div[2]/div[3]/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div[1]/a")
 	WebElement btnCompare2;
 	
-	@FindBy(xpath = "//*[@id=\"DataTables_Table_0\"]/tbody/tr[5]/td/a")
+	@FindBy(css = "#DataTables_Table_1_wrapper")
+	WebElement elementactive;
+	
+	@FindBy(xpath = "//*[@id=\"DataTables_Table_1\"]/tbody/tr[5]/td/a")
 	WebElement btnSelect1;
 	
-	@FindBy(xpath = "//*[@id=\"DataTables_Table_0\"]/tbody/tr[5]/td[2]/a")
+	@FindBy(css = "#DataTables_Table_0 > tbody > tr.add-to-cart.odd > td.even.product_1491 > a")
 	WebElement btnSelect2;
 	
 	@FindBy(id = "pa_color")
@@ -94,7 +101,6 @@ private WebDriver driver;
 	@FindBy(css = "#post-7 > div > div > div > p.woocommerce-thankyou-order-received")
 	WebElement txtOrder;
 	
-	Actions action = new Actions(driver);
 	
 	public void backToHomePage() {
 		btnHome.click();
@@ -104,8 +110,10 @@ private WebDriver driver;
 		
 		scroll();
 		scroll();
-		action.moveToElement(hoverProduct1).perform();
-		action.moveToElement(btnCompare1).click().perform();
+		tunggu();
+		btnCompare1.click();
+		tunggu();
+		
 		btnSelect1.click();
 		tunggu();
 		scroll();
@@ -139,8 +147,9 @@ private WebDriver driver;
 		btnHome.click();
 		scroll();
 		scroll();
-		action.moveToElement(hoverProduct2).perform();
-		action.moveToElement(btnCompare2).click().perform();
+		tunggu();
+		btnCompare2.click();
+		tunggu();
 		btnSelect2.click();
 		tunggu();
 		scroll();
@@ -200,6 +209,8 @@ private WebDriver driver;
 		JavascriptExecutor je = (JavascriptExecutor) driver;
 		je.executeScript("window.scrollBy(0,500)");
 	}
+	
+	
 	
 	
 	

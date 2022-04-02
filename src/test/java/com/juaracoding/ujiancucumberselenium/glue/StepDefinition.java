@@ -53,7 +53,12 @@ public class StepDefinition {
 	@Before
 	public void initializeObjects() {
 		DriverSingleton.getInstance(configurationProperties.getBrowser());
+		
 		loginPage = new LoginPage();
+		registerPage = new RegisterPage();
+		orderSearch = new OrderSearch();
+		orderWithCompare = new OrderWithCompare();
+		orderWithCompare = new OrderWithCompare();
 
 		TestCases[] tests = TestCases.values();
 		extentTest = reports.startTest(tests[Utils.testCount].getTestName());
@@ -80,6 +85,8 @@ public class StepDefinition {
 		driver.quit();
 	}
 	
+	//Register
+	
 	@Given("Customer mengakses url")
 	public void customer_mengakses_url() {
 		driver = DriverSingleton.getDriver();
@@ -90,13 +97,14 @@ public class StepDefinition {
 	@When("Customer melakukan registrasi")
 	public void customer_melakukan_registrasi() {
 		scroll();
-		registerPage.submitRegister(configurationProperties.getUserName() ,configurationProperties.getEmail(), configurationProperties.getPassword());
+		tunggu();
+		registerPage.submitRegister(configurationProperties.getUsernameReg(), configurationProperties.getPasswordReg(), configurationProperties.getEmailReg());
 		extentTest.log(LogStatus.PASS, "Customer melakukan registrasi");
 	}
 	
 	@Then("Customer berhasil registrasi")
 	public void customer_berhasil_registrasi() {
-		//refresh
+		tunggu();
 		assertEquals(configurationProperties.getTxtTitleLoginPage(), registerPage.getTxtTitleLoginPage());
 		extentTest.log(LogStatus.PASS, "Customer berhasil registrasi");
 	}
@@ -172,7 +180,7 @@ public class StepDefinition {
 	
 	public void tunggu() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
