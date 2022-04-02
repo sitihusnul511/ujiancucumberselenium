@@ -13,6 +13,7 @@ import com.juaracoding.ujiancucumberselenium.config.AutomationFrameworkConfig;
 import com.juaracoding.ujiancucumberselenium.drivers.DriverSingleton;
 import com.juaracoding.ujiancucumberselenium.pages.LoginPage;
 import com.juaracoding.ujiancucumberselenium.pages.OrderSearch;
+import com.juaracoding.ujiancucumberselenium.pages.OrderWithCompare;
 import com.juaracoding.ujiancucumberselenium.pages.RegisterPage;
 import com.juaracoding.ujiancucumberselenium.utils.ConfigurationProperties;
 import com.juaracoding.ujiancucumberselenium.utils.Constants;
@@ -27,6 +28,7 @@ import io.cucumber.java.AfterAll;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,6 +42,7 @@ public class StepDefinition {
 	private LoginPage loginPage;
 	private RegisterPage registerPage;
 	private OrderSearch orderSearch;
+	private OrderWithCompare orderWithCompare;
 	
 	ExtentTest extentTest;
 	static ExtentReports reports = new ExtentReports("src/main/resources/TestReport.html");
@@ -133,6 +136,39 @@ public class StepDefinition {
 		assertEquals(configurationProperties.getGetTxtOrder(), orderSearch.getPageCheckout());
 		extentTest.log(LogStatus.PASS, "Customer berhasil order");
 	}
+	
+	@When("Customer kembali ke halaman utama")
+	public void customer_kembali_ke_halaman_utama() {
+		orderWithCompare.backToHomePage();
+		extentTest.log(LogStatus.PASS, "Customer kembali ke halaman utama");
+		
+	}
+	
+	@When("Customer memilih product")
+	public void customer_memilih_product() {
+		orderWithCompare.pilihProduct1(1);
+		extentTest.log(LogStatus.PASS, "Customer memilih product");
+	}
+	
+	@And("Customer memilih product kedua")
+	public void customer_memilih_product_kedua() {
+		orderWithCompare.pilihProduct2(1);
+		extentTest.log(LogStatus.PASS, "Customer memilih product kedua");
+	}
+	
+	@And("Customer checkout product")
+	public void customer_checkout_product() {
+		orderWithCompare.checkout();
+		extentTest.log(LogStatus.PASS, "Customer checkout product");
+	}
+	
+	@Then("Customer berhasil order kedua")
+	public void customer_berhasil_order_kedua() {
+		assertEquals(configurationProperties.getGetTxtOrder(), orderWithCompare.getTxtOrder());
+		extentTest.log(LogStatus.PASS, "Customer berhasil order kedua");
+	}
+	
+	
 	
 	public void tunggu() {
 		try {

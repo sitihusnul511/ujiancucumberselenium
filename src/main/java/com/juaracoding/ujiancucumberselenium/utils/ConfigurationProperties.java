@@ -67,6 +67,9 @@ public class ConfigurationProperties {
 	
 	@Value("${getTxtOrder}")
 	private String getTxtOrder;
+	
+	@Value("${pilih}")
+	private String pilih;
 
 	public String getBrowser() {
 		return browser;
@@ -146,6 +149,10 @@ public class ConfigurationProperties {
 	
 	public String getGetTxtOrder() {
 		return getTxtOrder;
+	}
+	
+	public String getPilih() {
+		return pilih;
 	}
 	
 //setter
@@ -229,4 +236,11 @@ public class ConfigurationProperties {
 	public void setGetTxtOrder(String getTxtOrder) {
 		this.getTxtOrder = getTxtOrder;
 	}
+
+
+	public void setPilih(String pilih) {
+		this.pilih = pilih;
+	}
+	
+	
 }
