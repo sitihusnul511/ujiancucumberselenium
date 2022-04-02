@@ -154,13 +154,13 @@ public class StepDefinition {
 	
 	@When("Customer memilih product")
 	public void customer_memilih_product() {
-		orderWithCompare.pilihProduct1(1);
+		orderWithCompare.pilihProduct1(configurationProperties.getColours(), configurationProperties.getSizes());
 		extentTest.log(LogStatus.PASS, "Customer memilih product");
 	}
 	
 	@And("Customer memilih product kedua")
 	public void customer_memilih_product_kedua() {
-		orderWithCompare.pilihProduct2(1);
+		orderWithCompare.pilihProduct2(configurationProperties.getColours2(), configurationProperties.getSizes2());;
 		extentTest.log(LogStatus.PASS, "Customer memilih product kedua");
 	}
 	

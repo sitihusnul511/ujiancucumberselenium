@@ -41,13 +41,13 @@ private WebDriver driver;
 	@FindBy(xpath = "//*[@id=\"noo-site\"]/div[2]/div[3]/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div[1]/a")
 	WebElement btnCompare2;
 	
-	@FindBy(css = "#DataTables_Table_1_wrapper")
-	WebElement elementactive;
+	@FindBy(xpath = "//iframe[@name='1648907187293']")
+	WebElement iframe;
 	
-	@FindBy(xpath = "//*[@id=\"DataTables_Table_1\"]/tbody/tr[5]/td/a")
+	@FindBy(xpath = "//*[@id=\"DataTables_Table_0\"]/tbody/tr[5]/td/a")
 	WebElement btnSelect1;
 	
-	@FindBy(css = "#DataTables_Table_0 > tbody > tr.add-to-cart.odd > td.even.product_1491 > a")
+	@FindBy(xpath = "//*[@id=\"DataTables_Table_0\"]/tbody/tr[5]/td[2]/a")
 	WebElement btnSelect2;
 	
 	@FindBy(id = "pa_color")
@@ -57,7 +57,10 @@ private WebDriver driver;
 	WebElement dropdown_size;
 	
 	@FindBy(xpath = "//*[@id=\"product-1497\"]/div[1]/div[2]/form/div/div[2]/button")
-	WebElement btnCart;
+	WebElement btnCart1;
+	
+	@FindBy(xpath = "//*[@id=\"product-1491\"]/div[1]/div[2]/form/div/div[2]/button")
+	WebElement btnCart2;
 	
 	@FindBy(css = "#noo-site > header > div.noo-topbar > div > ul.pull-right.noo-topbar-right > li:nth-child(3) > a")
 	WebElement checkout;
@@ -106,43 +109,40 @@ private WebDriver driver;
 		btnHome.click();
 	}
 	
-	public void pilihProduct1(int pilih) {
+	public void pilihProduct1(String colors, String sizes) {
 		
 		scroll();
 		scroll();
 		tunggu();
 		btnCompare1.click();
 		tunggu();
+		tunggu();
 		
+		int size = driver.findElements(By.tagName("1648907187293")).size();
+	    for(int j=0; j<=size; j++){
+		driver.switchTo().frame(j);
+		int total=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/tbody/tr[5]/td/a")).size();
+		System.out.println(total);
+	    }
 		btnSelect1.click();
 		tunggu();
+		
+		tunggu();
 		scroll();
-		scroll();
+		tunggu();
 
 		dropdown_color.click();
-		List<Keys> dropdown_color = new ArrayList<Keys>();
-		for(int i=0; i<pilih; i++) {
-			dropdown_color.add(Keys.DOWN);
-		}
-		dropdown_color.add(Keys.ENTER);
-		CharSequence[] cs = dropdown_color.toArray(new CharSequence[dropdown_color.size()]);
-		Actions keyDown = new Actions(driver); keyDown.sendKeys(Keys.chord(cs)).perform();
-		
-		
+		dropdown_color.sendKeys(colors);
+		dropdown_color.sendKeys(Keys.ENTER);
 		dropdown_size.click();
-		List<Keys> dropdown_size = new ArrayList<Keys>();
-		for(int i=0; i<1; i++) {
-			dropdown_size.add(Keys.DOWN);
-		}
-		dropdown_size.add(Keys.ENTER);
-		CharSequence[] cs1 = dropdown_size.toArray(new CharSequence[dropdown_size.size()]);
-		Actions keyDown1 = new Actions(driver); keyDown1.sendKeys(Keys.chord(cs1)).perform();
+		dropdown_size.sendKeys(sizes);
+		dropdown_size.sendKeys(Keys.ENTER);
 		
-		btnCart.click();
+		btnCart1.click();
 		
 	}
 	
-	public void pilihProduct2(int pilih) {
+	public void pilihProduct2(String colors2, String sizes2) {
 		
 		btnHome.click();
 		scroll();
@@ -150,32 +150,29 @@ private WebDriver driver;
 		tunggu();
 		btnCompare2.click();
 		tunggu();
+		tunggu();
+		
+		int size = driver.findElements(By.tagName("1648907187293")).size();
+	    for(int j=0; j<=size; j++){
+		driver.switchTo().frame(j);
+		int total=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/tbody/tr[5]/td[2]/a")).size();
+		System.out.println(total);
+	    }
 		btnSelect2.click();
 		tunggu();
+		
+		tunggu();
 		scroll();
-		scroll();
-
+		tunggu();
 
 		dropdown_color.click();
-		List<Keys> dropdown_color = new ArrayList<Keys>();
-		for(int i=0; i<pilih; i++) {
-			dropdown_color.add(Keys.DOWN);
-		}
-		dropdown_color.add(Keys.ENTER);
-		CharSequence[] cs = dropdown_color.toArray(new CharSequence[dropdown_color.size()]);
-		Actions keyDown = new Actions(driver); keyDown.sendKeys(Keys.chord(cs)).perform();
-		
-		
+		dropdown_color.sendKeys(colors2);
+		dropdown_color.sendKeys(Keys.ENTER);
 		dropdown_size.click();
-		List<Keys> dropdown_size = new ArrayList<Keys>();
-		for(int i=0; i<1; i++) {
-			dropdown_size.add(Keys.DOWN);
-		}
-		dropdown_size.add(Keys.ENTER);
-		CharSequence[] cs1 = dropdown_size.toArray(new CharSequence[dropdown_size.size()]);
-		Actions keyDown1 = new Actions(driver); keyDown1.sendKeys(Keys.chord(cs1)).perform();
-		
-		btnCart.click();
+		dropdown_size.sendKeys(sizes2);
+		dropdown_size.sendKeys(Keys.ENTER);
+		tunggu();
+		btnCart2.click();
 		
 	}
 	

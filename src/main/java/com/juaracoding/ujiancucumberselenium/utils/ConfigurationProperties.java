@@ -80,6 +80,18 @@ public class ConfigurationProperties {
 	
 	@Value("${pilih}")
 	private String pilih;
+	
+	@Value("${colours}")
+	private String colours;
+	
+	@Value("${sizes}")
+	private String sizes;
+	
+	@Value("${colours2}")
+	private String colours2;
+	
+	@Value("${sizes2}")
+	private String sizes2;
 
 	public String getBrowser() {
 		return browser;
@@ -274,6 +286,38 @@ public class ConfigurationProperties {
 
 	public void setEmailReg(String emailReg) {
 		this.emailReg = emailReg;
+	}
+
+	public String getColours() {
+		return colours;
+	}
+
+	public void setColours(String colours) {
+		this.colours = colours;
+	}
+
+	public String getSizes() {
+		return sizes;
+	}
+
+	public void setSizes(String sizes) {
+		this.sizes = sizes;
+	}
+
+	public String getColours2() {
+		return colours2;
+	}
+
+	public void setColours2(String colours2) {
+		this.colours2 = colours2;
+	}
+
+	public String getSizes2() {
+		return sizes2;
+	}
+
+	public void setSizes2(String sizes2) {
+		this.sizes2 = sizes2;
 	}
 	
 	
