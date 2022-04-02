@@ -53,6 +53,7 @@ public class RegisterPage {
 		tunggu();
 		inputPasswordReg.sendKeys(passwordReg);
 		tunggu();
+		scroll();
 		btnRegister.click();
 	}
 	
