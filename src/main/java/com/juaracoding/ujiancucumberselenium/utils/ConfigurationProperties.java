@@ -11,20 +11,20 @@ public class ConfigurationProperties {
 	@Value("${browser}")
 	private String browser;
 	
+	@Value("${user}")
+	private String userName;
+	
 	@Value("${email}")
 	private String email;
 	
 	@Value("${password}")
 	private String password;
-	
-	@Value("${user}")
-	private String userName;
-	
-	@Value("${txtWelcome}")
-	private String txtWelcome;
-	
+		
 	@Value("${txtTitleLoginPage}")
 	private String txtTitleLoginPage;
+
+	@Value("${txtMyAccount}")
+	private String txtMyAccount;
 
 	public String getBrowser() {
 		return browser;
@@ -41,9 +41,9 @@ public class ConfigurationProperties {
 	public String getUserName() {
 		return userName;
 	}
-
-	public String getTxtWelcome() {
-		return txtWelcome;
+	
+	public String getTxtMyAccount() {
+		return txtMyAccount;
 	}
 
 	public String getTxtTitleLoginPage() {
@@ -70,10 +70,9 @@ public class ConfigurationProperties {
 		this.userName = userName;
 	}
 
-	public void setTxtWelcome(String txtWelcome) {
-		this.txtWelcome = txtWelcome;
+	public void setTxtMyAccount(String txtMyAccount) {
+		this.txtMyAccount = txtMyAccount;
 	}
-	
 
 	
 }
